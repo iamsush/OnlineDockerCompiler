@@ -7,14 +7,27 @@ var bodyParser = require('body-parser');
 
 var app = express();
 //Socket
-// var socket_io = require('socket.io');
-// var io = socket_io();
-// app.io = io;
+var socket_io = require('socket.io');
+var io = socket_io();
+app.io = io;
+// var socketId = new String();
+// var connections = [];
+// io.sockets.on('connection', function(socket) {
+//   console.log(socket.id);
+//   connections.push(socket);
+//   console.log('Connected: %s sockets connected', connections.length)
+//
+//   socket.on('disconnect', function(){
+//     connections.splice(connections.indexOf(socket), 1);
+//     console.log('Disconnected: %s sockets connected', connections.length);
+//   })
+// });
+// console.log(connections);
 
 //Routes
 var index = require('./routes/index');
-var code = require('./routes/code')
-//var code = require('./routes/code')(io);
+// var code = require('./routes/code')
+var code = require('./routes/code')(io);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -3,11 +3,11 @@ exports.args = function(data){
   return {
     'C++' : {
       'image' :  'cpp:updated',
-      'CMD' : ['bash', '-c', `g++ ${data.filename} && ./a.out < ${data.args}`],
+      'CMD' : ['bash', '-c', `g++ ${data.filename} -o ${data.filename}.out && ./${data.filename}.out < ${data.args}`],
     },
     'C' : {
       'image' :  'cpp:updated',
-      'CMD' : ['bash', '-c', `gcc ${data.filename} && ./a.out < ${data.args}`]
+      'CMD' : ['bash', '-c', `gcc ${data.filename} -o ${data.filename}.out && ./${data.filename}.out < ${data.args}`]
     },
     'Python' : {
       'image' : 'python:updated',
@@ -18,7 +18,7 @@ exports.args = function(data){
     'options' :  {
       "WorkingDir":"/home",
       "HostConfig":{
-        "Binds":["/home/sushant/SampleProj/NodeCompiler/dockerFiles:/home"]
+        "Binds":["/home/sushant/SampleProj/NodeCompiler/clientDownloads:/home"]
       }
     }
   }
