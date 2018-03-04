@@ -1,3 +1,0 @@
-/usr/bin/ld:time2.py: file format not recognized; treating as linker script
-/usr/bin/ld:time2.py:1: syntax error
-collect2: error: ld returned 1 exit status

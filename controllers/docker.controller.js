@@ -4,7 +4,7 @@ module.exports = function(io){
   var FileService = require('../services/fileHandling.service');
   var DockerService = require('../services/docker.service');
   var path = require('path');
-  // var ss = require('socket.io-stream');
+  var Config = require('../config');
 
   return  {
     fileSave : function(req, res, next){
@@ -57,16 +57,17 @@ module.exports = function(io){
         const command = dockerArgs[data.language]['CMD'];
         const options = dockerArgs['options'];
         let outputFile = FileService.createFile(`${data.filename}-out.txt`);
+        // console.log(options);
 
         docker.run(image, command, outputFile, options)
         .then(function(container) {
           if(flag == true){
-            res.sendFile(path.join(__dirname, `../clientDownloads/${data.filename}-out.txt`));
+            res.sendFile(path.join(Config.filePath, `${data.filename}-out.txt`));
             flag = false;
           }
 
           io.to(req.body.socket).emit('foo', `${data.filename}-out.txt`);
-          // FileService.deleteFiles([`${data.filename}`, `${data.filename}.out`]);
+          FileService.deleteFiles([`${data.filename}`, `${data.filename}.out`]);
           return container.remove();
         })
         .catch(function(err) {
@@ -78,7 +79,7 @@ module.exports = function(io){
     download : function(req, res, next){
       let id = req.body.id;
       console.log(id);
-      res.download(path.join(__dirname, `../clientDownloads/${id}`));
+      res.download(path.join(Config.filePath, `${id}`));
     }
   }
 }

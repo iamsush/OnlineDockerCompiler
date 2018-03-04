@@ -9,6 +9,9 @@ var extension = {
 $("#submitButtonDirect").click(function(event){
   event.preventDefault();
   event.stopPropagation();
+
+  addLoader();
+
   var send = {
     code : $('#code').val(),
     language : $('#language').val(),
@@ -19,6 +22,7 @@ $("#submitButtonDirect").click(function(event){
   $.post('http://localhost:3000/code/online', send, function(data){
     console.log(data);
     $('#output').val(data);
+    $('#loader').hide();
     $(function() {
       $('#output').each(function() {
         $(this).height($(this).prop('scrollHeight'));
@@ -28,3 +32,7 @@ $("#submitButtonDirect").click(function(event){
     console.log(err)
   });
 });
+
+function addLoader(){
+  $('#loader').show();
+}

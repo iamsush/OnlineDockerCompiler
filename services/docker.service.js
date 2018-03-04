@@ -1,4 +1,4 @@
-
+const Config = require('../config');
 exports.args = function(data){
   return {
     'C++' : {
@@ -18,7 +18,7 @@ exports.args = function(data){
     'options' :  {
       "WorkingDir":"/home",
       "HostConfig":{
-        "Binds":["/home/sushant/SampleProj/NodeCompiler/clientDownloads:/home"]
+        "Binds":[`${Config.bindPath}:/home`]
       }
     }
   }

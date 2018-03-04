@@ -6,6 +6,7 @@ module.exports = function(io){
 
   router.post('/test', function(req, res, next){
     io.sockets.emit('foo', 'oh yeah');
+    console.log(req.body);
     res.json({
       msg:'success'
     })

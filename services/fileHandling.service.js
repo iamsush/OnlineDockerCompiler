@@ -1,7 +1,8 @@
 var fs = require("fs");
 var { Readable } = require('stream');
+const Config = require('../config');
 
-const FILE_PATH = '/home/sushant/SampleProj/NodeCompiler/clientDownloads';
+const FILE_PATH = Config.bindPath;
 
 const multer = require('multer');
 const storage = multer.diskStorage({
