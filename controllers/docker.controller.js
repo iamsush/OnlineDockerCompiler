@@ -57,7 +57,8 @@ module.exports = function(io){
         const command = dockerArgs[data.language]['CMD'];
         const options = dockerArgs['options'];
         let outputFile = FileService.createFile(`${data.filename}-out.txt`);
-        // console.log(options);
+
+        console.log(options);
 
         docker.run(image, command, outputFile, options)
         .then(function(container) {
@@ -67,7 +68,7 @@ module.exports = function(io){
           }
 
           io.to(req.body.socket).emit('foo', `${data.filename}-out.txt`);
-          FileService.deleteFiles([`${data.filename}`, `${data.filename}.out`]);
+          // FileService.deleteFiles([`${data.filename}`, `${data.filename}-out.txt`]);
           return container.remove();
         })
         .catch(function(err) {
